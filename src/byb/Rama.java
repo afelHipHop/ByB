@@ -13,31 +13,27 @@ import java.util.*;
  */
 public class Rama implements Iterator{
     
+    public int apuntador;
     private double z;
-    private double[] variables;
+    private ArrayList<Double> variables;
+    private Rama HojaI;
+    private Rama HojaD;
     private Vector restricciones;
 
-    public Rama(double z, double[] variables){
-        setZ(z);
-        setVariables(variables);
+    public Rama(){
+        variables = new ArrayList<>();
+        HojaI=null;
+        HojaD=null;
+    }
+
+    public void setZ(double z){    
+        this.z = z;       
     }
     
-    public double getZ() {
+    public double getZ(){
         return z;
     }
-
-    public void setZ(double z) {
-        this.z = z;
-    }
-
-    public double[] getVariables() {
-        return variables;
-    }
-
-    public void setVariables(double[] variables) {
-        this.variables = variables;
-    }
-
+    
     @Override
     public boolean hasNext() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -53,10 +49,18 @@ public class Rama implements Iterator{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void añadirVariables(double[] v){
+    
+        for (int i = 0; i < v.length ; i++){
+            variables.add(v[i]);
+        }
+        
+    }
+    
     public double elegirVariable(){
-        for (int i = 0; i < variables.length ; i++){
-             if (variables[i] % 1 != 0) {
-                return variables[i];
+        for (Double variable : variables) {
+            if (variable % 1 != 0) {
+                return variable;
             }
         }
         return -1;
