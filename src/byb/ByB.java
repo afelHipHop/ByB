@@ -18,7 +18,8 @@ public class ByB {
     
     public static void main(String[] args) {
         double var[] = {4,5.2,6.1,8};
-        Rama inicio = new Rama(0.1,var);
+        Rama inicio = new Rama();
+        inicio.añadirVariables(var);
         System.out.println(inicio.elegirVariable());
     }
     
