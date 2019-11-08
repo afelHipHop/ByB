@@ -18,6 +18,8 @@ public class ByBGrafico extends javax.swing.JFrame {
     private ArrayList<JTextField> txt;
     private ArrayList<JTextField> txtRes;
     private ArrayList<JComboBox> cb;
+    int cantRestricciones;
+    int cantVariables; 
 
 
     /**
@@ -161,19 +163,22 @@ public class ByBGrafico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        int restricciones = Integer.parseInt(txtRestricciones.getText());
-        int variables = Integer.parseInt(txtVariables.getText());       
+        cantRestricciones = Integer.parseInt(txtRestricciones.getText());
+        cantVariables = Integer.parseInt(txtVariables.getText());       
         pnlRes.removeAll();
         pnlPanel.removeAll();
-        generarCamposRes(variables);
+        generarCamposRes(cantVariables);
         pnlRes.updateUI();
-        generarCampos(restricciones,variables);
+        generarCampos(cantRestricciones,cantVariables);
         pnlPanel.updateUI();
 
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnSolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolucionActionPerformed
-        // TODO add your handling code here:
+
+        Interprete in = new Interprete();
+        
+        in.interpretar(recogerDatosFunOb(), recogerDatosRes(), (String)cmbRes.getSelectedItem(), recogerDatosCB(), recogerDatosIRes(),cantVariables);
     }//GEN-LAST:event_btnSolucionActionPerformed
 
     /**
@@ -280,6 +285,43 @@ public class ByBGrafico extends javax.swing.JFrame {
         cb.add(comboBox);
     }
     
+    public ArrayList recogerDatosFunOb(){
+        ArrayList<String> funcion = new ArrayList<>();
+        for(JTextField f: txtRes){
+            funcion.add(f.getText());
+        }
+        return funcion;
+    }
+    
+    public ArrayList recogerDatosCB(){
+        ArrayList<String> simbolos = new ArrayList<>();
+        for(JComboBox s: cb){
+            simbolos.add((String)s.getSelectedItem());
+        }
+        return simbolos;
+    }
+    
+    public ArrayList recogerDatosRes(){
+        ArrayList<String> restricciones = new ArrayList<>();
+        for(int i = 1;i<=txt.size();i++){
+            if(i%(cantVariables+1)==0&&i!=0){
+                //iRestricciones.add(txt.get(i-1).getText());
+            }else{
+                restricciones.add(txt.get(i-1).getText());
+            }
+        }
+        return restricciones;
+    }
+    
+    public ArrayList recogerDatosIRes(){
+        ArrayList<String> iRestricciones = new ArrayList<>();
+        for(int i = 1;i<=txt.size();i++){
+            if(i%(cantVariables+1)==0&&i!=0){
+                iRestricciones.add(txt.get(i-1).getText());
+            }
+        }
+        return iRestricciones;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
