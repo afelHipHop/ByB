@@ -16,7 +16,7 @@ public class Interprete {
     private String problema="";
     private final String SALTO ="\n"; 
     
-    public void interpretar(ArrayList<String> varFunObj, ArrayList<String> varRes, String obj, ArrayList<String> operacion, ArrayList<String> valSol,int cVar){
+    public String interpretar(ArrayList<String> varFunObj, ArrayList<String> varRes, String obj, ArrayList<String> operacion, ArrayList<String> valSol,int cVar){
         
         funcionObj(varFunObj, obj);
         restricciones(varRes, operacion, valSol, cVar);
@@ -25,6 +25,8 @@ public class Interprete {
         rango(cVar, "1", "integer");
         
         System.out.println(problema);
+        
+        return problema;
         
     }
     

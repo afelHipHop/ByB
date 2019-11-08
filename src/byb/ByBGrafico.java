@@ -7,6 +7,8 @@ package byb;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -176,9 +178,17 @@ public class ByBGrafico extends javax.swing.JFrame {
 
     private void btnSolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolucionActionPerformed
 
-        Interprete in = new Interprete();
+//        Interprete in = new Interprete();
+//        
+//        in.interpretar(recogerDatosFunOb(), recogerDatosRes(), (String)cmbRes.getSelectedItem(), recogerDatosCB(), recogerDatosIRes(),cantVariables);
         
-        in.interpretar(recogerDatosFunOb(), recogerDatosRes(), (String)cmbRes.getSelectedItem(), recogerDatosCB(), recogerDatosIRes(),cantVariables);
+        ByB b = new ByB();
+        
+        try {
+            b.operar(new Interprete().interpretar(recogerDatosFunOb(), recogerDatosRes(), (String)cmbRes.getSelectedItem(), recogerDatosCB(), recogerDatosIRes(),cantVariables), cantVariables);
+        } catch (Exception ex) {
+            Logger.getLogger(ByBGrafico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSolucionActionPerformed
 
     /**

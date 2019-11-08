@@ -5,21 +5,20 @@
  */
 package byb;
 
-import java.util.ArrayList;
-import it.ssc.pl.milp.*;
+import it.ssc.log.SscLogger;
+import it.ssc.parser.exception.InvalidInformatStringException;
+import it.ssc.pl.milp.MILP;
+import it.ssc.pl.milp.Solution;
+import it.ssc.pl.milp.SolutionType;
+import it.ssc.pl.milp.Variable;
+import it.ssc.ref.InputString;
 /**
  *
  * @author afelr
  */
 public class ByB {
-
-    /**
-     * @param args the command line arguments
-     * @throws java.lang.Exception
-     */
     
-    
-    public static void main(String[] args) throws Exception {
+/*   public static void main(String[] args) throws Exception {
 //        double var[] = {4,5.2,6.1,8};
 //        Rama inicio = new Rama();
 //        inicio.añadirVariables(var);
@@ -66,8 +65,27 @@ public class ByB {
             System.out.println("o.f. value:"+solution.getOptimumValue());
         }else
             System.out.println("no es optimo");
-    }
+    }*/
 
+    public void operar(String problema,int cVar) throws Exception{
+        InputString milp_input = new InputString(problema);
+        milp_input.setInputFormat(formato(cVar));
+ 
+        MILP milp=new MILP(milp_input);
+        SolutionType solution_type= milp.resolve();
+ 
+        if(solution_type==SolutionType.OPTIMUM) { 
+            Solution solution=milp.getSolution();
+            for(Variable var:solution.getVariables()) {
+                SscLogger.log("Variable :"+var.getName() + " value:"+var.getValue());
+            }
+            SscLogger.log("o.f. value:"+solution.getOptimumValue());
+        }else
+            System.out.println("No es posible operar");
+    }
     
+    public String formato(int cVar){
+        return "X1-X"+cVar+":double, TYPE:varstring(20),  RHS:double";
+    }
     
 }
