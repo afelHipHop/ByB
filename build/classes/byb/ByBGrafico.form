@@ -23,20 +23,22 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane3" max="32767" attributes="0"/>
+                  <Component id="btnSolucion" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="lblVariables" max="32767" attributes="0"/>
+                      <Component id="lblVariables" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="31" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="27" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblRestricciones" max="32767" attributes="0"/>
+                      <Component id="lblRestricciones" min="-2" pref="71" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="36" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="btnGenerar" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnGenerar" min="-2" pref="75" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -48,14 +50,20 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="lblVariables" alignment="2" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" alignment="2" max="32767" attributes="0"/>
-                  <Component id="lblRestricciones" alignment="2" max="32767" attributes="0"/>
-                  <Component id="jScrollPane2" alignment="2" max="32767" attributes="0"/>
-                  <Component id="btnGenerar" alignment="2" pref="28" max="32767" attributes="0"/>
+                  <Component id="lblVariables" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblRestricciones" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="jScrollPane2" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGenerar" alignment="2" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-              <Component id="jScrollPane3" pref="231" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jScrollPane4" pref="40" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <Component id="jScrollPane3" max="32767" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+              <Component id="btnSolucion" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -116,10 +124,64 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="229" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="239" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="btnSolucion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Encontrar solucion"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSolucionActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="pnlRes">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmbRes" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="215" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmbRes" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="69" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JComboBox" name="cmbRes">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>

@@ -16,6 +16,9 @@ import javax.swing.*;
 public class ByBGrafico extends javax.swing.JFrame {
     
     private ArrayList<JTextField> txt;
+    private ArrayList<JTextField> txtRes;
+    private ArrayList<JComboBox> cb;
+
 
     /**
      * Creates new form ByBGrafico
@@ -23,6 +26,12 @@ public class ByBGrafico extends javax.swing.JFrame {
     public ByBGrafico() {
         initComponents();
         txt = new ArrayList<>();
+        txtRes = new ArrayList<>();
+        cb = new ArrayList<>();
+        cmbRes.removeAllItems();
+        cmbRes.addItem("min");
+        cmbRes.addItem("max");
+        cmbRes.setEnabled(false);
     }
 
     /**
@@ -43,6 +52,10 @@ public class ByBGrafico extends javax.swing.JFrame {
         lblVariables = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         pnlPanel = new javax.swing.JPanel();
+        btnSolucion = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        pnlRes = new javax.swing.JPanel();
+        cmbRes = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,10 +82,38 @@ public class ByBGrafico extends javax.swing.JFrame {
         );
         pnlPanelLayout.setVerticalGroup(
             pnlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 229, Short.MAX_VALUE)
+            .addGap(0, 239, Short.MAX_VALUE)
         );
 
         jScrollPane3.setViewportView(pnlPanel);
+
+        btnSolucion.setText("Encontrar solucion");
+        btnSolucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSolucionActionPerformed(evt);
+            }
+        });
+
+        cmbRes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout pnlResLayout = new javax.swing.GroupLayout(pnlRes);
+        pnlRes.setLayout(pnlResLayout);
+        pnlResLayout.setHorizontalGroup(
+            pnlResLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlResLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmbRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(215, Short.MAX_VALUE))
+        );
+        pnlResLayout.setVerticalGroup(
+            pnlResLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlResLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmbRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
+        jScrollPane4.setViewportView(pnlRes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,16 +123,18 @@ public class ByBGrafico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
+                    .addComponent(btnSolucion)
+                    .addComponent(jScrollPane4)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblVariables, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblVariables, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblRestricciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblRestricciones, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnGenerar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -99,13 +142,18 @@ public class ByBGrafico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lblVariables, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(lblRestricciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
-                    .addComponent(btnGenerar, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                    .addComponent(lblVariables)
+                    .addComponent(lblRestricciones)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGenerar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3)
+                .addGap(18, 18, 18)
+                .addComponent(btnSolucion)
                 .addContainerGap())
         );
 
@@ -115,11 +163,18 @@ public class ByBGrafico extends javax.swing.JFrame {
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         int restricciones = Integer.parseInt(txtRestricciones.getText());
         int variables = Integer.parseInt(txtVariables.getText());       
+        pnlRes.removeAll();
         pnlPanel.removeAll();
+        generarCamposRes(variables);
+        pnlRes.updateUI();
         generarCampos(restricciones,variables);
         pnlPanel.updateUI();
 
     }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void btnSolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolucionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSolucionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,19 +212,53 @@ public class ByBGrafico extends javax.swing.JFrame {
     }
 
     public void generarCampos(int r, int v){
-        GridLayout gl = new GridLayout(r,v*2);
+        v = (v*2)+2;
+        GridLayout gl = new GridLayout(r,v);
         pnlPanel.setLayout(gl);
         for (int i = 0; i<r;i++){
             int x=1;
-            for (int j = 0; j<v*2;j++){
-                if(j%2==0){
-                    crearTextField();
+            for (int j = 0; j<v;j++){
+                if(j%(v-2)==0 && j!=0){
+                    crearComboBox();
                 }else{
-                    crearLabel(x);
-                    x++;
+                    if(j%2==0 || j%(v-1)==0){
+                        crearTextField();
+                    }else{
+                        crearLabel(x);
+                        x++;
+                    }
                 }
             }
         }
+    }
+    
+    public void generarCamposRes(int x){
+        x=(x*2);
+        GridLayout glr = new GridLayout(1,x+2);
+        pnlRes.setLayout(glr);
+        pnlRes.add(cmbRes);
+        pnlRes.add(new JLabel("Z = "));
+        int y=1;
+        for (int j = 0; j<x;j++){
+            if(j%2==0){
+                crearTextFieldRes();
+            }else{
+                crearLabelRes(y);
+                y++;
+            }        
+        }
+        cmbRes.setEnabled(true);
+    }
+    
+    public void crearTextFieldRes(){
+        JTextField tfRes = new JTextField();
+        pnlRes.add(tfRes);
+        txtRes.add(tfRes);
+    }
+    
+    public void crearLabelRes(int x){
+        JLabel lbRes = new JLabel("X"+x);
+        pnlRes.add(lbRes);
     }
     
     public void crearTextField(){
@@ -183,14 +272,27 @@ public class ByBGrafico extends javax.swing.JFrame {
         pnlPanel.add(lb);
     }
     
+    public void crearComboBox(){
+        JComboBox comboBox = new JComboBox();
+        comboBox.addItem("<=");
+        comboBox.addItem(">=");
+        pnlPanel.add(comboBox);
+        cb.add(comboBox);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnSolucion;
+    private javax.swing.JComboBox<String> cmbRes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblRestricciones;
     private javax.swing.JLabel lblVariables;
     private javax.swing.JPanel pnlPanel;
+    private javax.swing.JPanel pnlRes;
     private javax.swing.JTextPane txtRestricciones;
     private javax.swing.JTextPane txtVariables;
     // End of variables declaration//GEN-END:variables
