@@ -60,10 +60,17 @@ public class Interprete {
     }
     
     public String cambioSimb(String simb){
-        if(simb.equals("<="))
-            simb="le";
-        else
-            simb="ge";
+        switch(simb){
+            case "<=":
+                simb="le";
+            break;
+            case ">=":
+                simb="ge";
+            break;
+            case "=":
+                simb="eq";
+            break;
+        }
         return simb;
     }
     
