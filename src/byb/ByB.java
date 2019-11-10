@@ -28,18 +28,7 @@ public class ByB {
         st = resolver(milp);
     }
 
-    public Boolean getFactible() throws Exception{
-       //milp=new MILP(agregarProblema(problema, cVar));
-         
-        /*if(resolver(milp)==SolutionType.OPTIMUM) { 
-            Solution solution=milp.getSolution();
-            for(Variable var:solution.getVariables()) {
-                SscLogger.log("Variable :"+var.getName() + " value:"+var.getValue());
-            }
-            SscLogger.log("o.f. value:"+solution.getOptimumValue());
-        }else
-            System.out.println("No es posible operar");*/
-        
+    public Boolean getFactible() throws Exception{      
         return st==SolutionType.OPTIMUM;
     }
     

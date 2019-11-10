@@ -53,11 +53,7 @@ public class ByBGrafico extends javax.swing.JFrame {
     private void initComponents() {
 
         btnGenerar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtRestricciones = new javax.swing.JTextPane();
         lblRestricciones = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtVariables = new javax.swing.JTextPane();
         lblVariables = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         pnlPanel = new javax.swing.JPanel();
@@ -68,6 +64,8 @@ public class ByBGrafico extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         pnlSol = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JButton();
+        txtVariables = new javax.swing.JTextField();
+        txtRestricciones = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,21 +76,7 @@ public class ByBGrafico extends javax.swing.JFrame {
             }
         });
 
-        txtRestricciones.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtRestriccionesKeyTyped(evt);
-            }
-        });
-        jScrollPane2.setViewportView(txtRestricciones);
-
         lblRestricciones.setText("Restricciones:");
-
-        txtVariables.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtVariablesKeyTyped(evt);
-            }
-        });
-        jScrollPane1.setViewportView(txtVariables);
 
         lblVariables.setText("Variables:");
 
@@ -157,6 +141,23 @@ public class ByBGrafico extends javax.swing.JFrame {
             }
         });
 
+        txtVariables.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVariablesActionPerformed(evt);
+            }
+        });
+        txtVariables.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtVariablesKeyTyped(evt);
+            }
+        });
+
+        txtRestricciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRestriccionesKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,12 +168,12 @@ public class ByBGrafico extends javax.swing.JFrame {
                     .addComponent(jScrollPane4)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblVariables, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtVariables, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
                         .addComponent(lblRestricciones, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRestricciones, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -191,11 +192,10 @@ public class ByBGrafico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblVariables)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGenerar)
-                        .addComponent(lblRestricciones)))
+                    .addComponent(btnGenerar)
+                    .addComponent(lblRestricciones)
+                    .addComponent(txtVariables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRestricciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -228,12 +228,15 @@ public class ByBGrafico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnSolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolucionActionPerformed
-        
-        try {
-            b = new ByB(problema(), cantVariables);
-            mostrarResultado();
-        } catch (Exception ex) {
-            Logger.getLogger(ByBGrafico.class.getName()).log(Level.SEVERE, null, ex);
+        if(verificarCampos()){
+            try {
+                b = new ByB(problema(), cantVariables);
+                mostrarResultado();
+            } catch (Exception ex) {
+                Logger.getLogger(ByBGrafico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar completos, si alguna variable no tiene valor en alguna restriccion por favor completar con un 0");
         }
     }//GEN-LAST:event_btnSolucionActionPerformed
 
@@ -246,20 +249,22 @@ public class ByBGrafico extends javax.swing.JFrame {
         txtVariables.setEnabled(true);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    private void txtVariablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVariablesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVariablesActionPerformed
+
     private void txtVariablesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVariablesKeyTyped
         char caracter = evt.getKeyChar();
-
-        if(((caracter < '0') || (caracter > '9'))){
-            evt.consume();
-        }
+            if(((caracter < '0') || (caracter > '9'))){
+                evt.consume();
+            }
     }//GEN-LAST:event_txtVariablesKeyTyped
 
     private void txtRestriccionesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRestriccionesKeyTyped
-        char caracter = evt.getKeyChar();
-
-        if(((caracter < '0') || (caracter > '9'))){
-            evt.consume();
-        }
+         char caracter = evt.getKeyChar();
+            if(((caracter < '0') || (caracter > '9'))){
+                evt.consume();
+            }
     }//GEN-LAST:event_txtRestriccionesKeyTyped
 
     /**
@@ -383,7 +388,19 @@ public class ByBGrafico extends javax.swing.JFrame {
     }
     
     public void crearTextField(JPanel panel, ArrayList list){
-        JTextField tf = new JTextField();
+        final JTextField tf = new JTextField();
+        tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent e){
+                char caracter = e.getKeyChar();
+                if(caracter == '-' && tf.getText().equals("")){
+
+                }else{
+                    if(((caracter < '0') || (caracter > '9'))){
+                        e.consume();
+                    }
+                }
+            }
+        });
         panel.add(tf);
         list.add(tf);
     }
@@ -404,7 +421,7 @@ public class ByBGrafico extends javax.swing.JFrame {
         cb.add(comboBox);
     }
     
-    public ArrayList recogerDatosFO(){
+    public ArrayList<String> recogerDatosFO(){
         ArrayList<String> funcion = new ArrayList<>();
         for(JTextField f: txtFO){
             funcion.add(f.getText());
@@ -420,7 +437,7 @@ public class ByBGrafico extends javax.swing.JFrame {
         return simbolos;
     }
     
-    public ArrayList recogerDatosRes(){
+    public ArrayList<String> recogerDatosRes(){
         ArrayList<String> restricciones = new ArrayList<>();
         for(int i = 1;i<=txt.size();i++){
             if(i%(cantVariables+1)==0&&i!=0){
@@ -432,7 +449,7 @@ public class ByBGrafico extends javax.swing.JFrame {
         return restricciones;
     }
     
-    public ArrayList recogerDatosIRes(){
+    public ArrayList<String> recogerDatosIRes(){
         ArrayList<String> iRestricciones = new ArrayList<>();
         for(int i = 1;i<=txt.size();i++){
             if(i%(cantVariables+1)==0&&i!=0){
@@ -441,7 +458,26 @@ public class ByBGrafico extends javax.swing.JFrame {
         }
         return iRestricciones;
     }
-        
+    
+    public Boolean verificarCampos(){
+        for(String s: recogerDatosFO()){
+            if(s.equals("")){
+                return false;
+            }
+        }
+        for(String s: recogerDatosRes()){
+            if(s.equals("")){
+                return false;
+            }
+        }
+        for(String s: recogerDatosIRes()){
+            if(s.equals("")){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public String problema(){
         return new Interprete().interpretar(recogerDatosFO(), recogerDatosRes(), (String)cmbFO.getSelectedItem(), recogerDatosCB(), recogerDatosIRes(),cantVariables);
     }
@@ -451,8 +487,6 @@ public class ByBGrafico extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnSolucion;
     private javax.swing.JComboBox<String> cmbFO;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -461,7 +495,7 @@ public class ByBGrafico extends javax.swing.JFrame {
     private javax.swing.JPanel pnlFO;
     private javax.swing.JPanel pnlPanel;
     private javax.swing.JPanel pnlSol;
-    private javax.swing.JTextPane txtRestricciones;
-    private javax.swing.JTextPane txtVariables;
+    private javax.swing.JTextField txtRestricciones;
+    private javax.swing.JTextField txtVariables;
     // End of variables declaration//GEN-END:variables
 }
