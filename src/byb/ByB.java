@@ -20,9 +20,16 @@ import java.util.ArrayList;
 public class ByB {
     
     private MILP milp;
+    private SolutionType st;
+    private Solution solution;
+    
+    public ByB(String problema,int cVar) throws Exception{
+        milp=new MILP(agregarProblema(problema, cVar));
+        st = resolver(milp);
+    }
 
-    public Boolean operar(String problema,int cVar) throws Exception{
-       milp=new MILP(agregarProblema(problema, cVar));
+    public Boolean getFactible() throws Exception{
+       //milp=new MILP(agregarProblema(problema, cVar));
          
         /*if(resolver(milp)==SolutionType.OPTIMUM) { 
             Solution solution=milp.getSolution();
@@ -33,7 +40,7 @@ public class ByB {
         }else
             System.out.println("No es posible operar");*/
         
-        return resolver(milp)==SolutionType.OPTIMUM;
+        return st==SolutionType.OPTIMUM;
     }
     
     public String formato(int cVar){
@@ -51,17 +58,32 @@ public class ByB {
         return solution_type;
     }
     
-    public ArrayList getNombreVariables(){
-        return null;
+    public ArrayList<String> getNombreVariables(){
+        sol();
+        ArrayList<String> nVar = new ArrayList<>();
+        for(Variable var:solution.getVariables()){
+            nVar.add(var.getName());
+        }
+        return nVar;
     }
     
-    public ArrayList getValorVariables(){
-        return null;
+    public ArrayList<Double> getValorVariables(){
+        sol();
+        ArrayList<Double> vVar = new ArrayList<>();
+        for(Variable var:solution.getVariables()){
+            vVar.add(var.getValue());
+        }
+        return vVar;
     }
     
-    public String getResultado(){
-        return "";
+    public Double getResultado(){
+        sol();
+        return solution.getOptimumValue();
     }
     
-    
+    public void sol(){
+        if (solution==null)
+            solution=milp.getSolution();
+        //return solution;
+    }
 }

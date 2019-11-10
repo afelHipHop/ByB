@@ -17,13 +17,15 @@ import javax.swing.*;
  */
 public class ByBGrafico extends javax.swing.JFrame {
     
+    private ByB b;    
+    
     private ArrayList<JTextField> txt;
     private ArrayList<JTextField> txtFO;
     private ArrayList<JComboBox> cb;
     private ArrayList<JLabel> lblSol;
     private int cantRestricciones;
     private int cantVariables; 
-    private ByB b;
+    
 
 
     /**
@@ -38,7 +40,6 @@ public class ByBGrafico extends javax.swing.JFrame {
         cmbFO.removeAllItems();
         cmbFO.setEnabled(false);
         btnSolucion.setEnabled(false);
-        b = new ByB();
     }
 
     /**
@@ -202,10 +203,9 @@ public class ByBGrafico extends javax.swing.JFrame {
 
     private void btnSolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolucionActionPerformed
         
-        mostrarResultado();
-        
         try {
-            b.operar(new Interprete().interpretar(recogerDatosFO(), recogerDatosRes(), (String)cmbFO.getSelectedItem(), recogerDatosCB(), recogerDatosIRes(),cantVariables), cantVariables);
+            b = new ByB(problema(), cantVariables);
+            mostrarResultado();
         } catch (Exception ex) {
             Logger.getLogger(ByBGrafico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -308,8 +308,27 @@ public class ByBGrafico extends javax.swing.JFrame {
         }
     }
     
-    public void mostrarResultado(){
+    public void mostrarResultado() throws Exception{
+        if(b.getFactible()){
+            for(int i = 0;i<lblSol.size();i++){
+                if(i==0){
+                    lblSol.get(i).setText("Problema factible, si se puede resolver");
+                }else{
+                    if(i==1){
+                        lblSol.get(i).setText("Z= "+b.getResultado());
+                    }else{
+                        llenarLabel(i);
+                    }
+                }
+            }
+        }else{
+            lblSol.get(0).setText("No es posible resolver, no es factible");
+        }
+        pnlSol.updateUI();
+    }
     
+    public void llenarLabel(int i){
+        lblSol.get(i).setText(b.getNombreVariables().get(i-2)+" = "+b.getValorVariables().get(i-2));
     }
     
     public void crearTextField(JPanel panel, ArrayList list){
@@ -370,6 +389,10 @@ public class ByBGrafico extends javax.swing.JFrame {
             }
         }
         return iRestricciones;
+    }
+        
+    public String problema(){
+        return new Interprete().interpretar(recogerDatosFO(), recogerDatosRes(), (String)cmbFO.getSelectedItem(), recogerDatosCB(), recogerDatosIRes(),cantVariables);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
