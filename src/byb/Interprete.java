@@ -24,7 +24,7 @@ public class Interprete {
         rango(cVar, ".", "upper  ");
         rango(cVar, "1", "integer");
         
-        System.out.println(problema);
+        //System.out.println(problema);
         
         return problema;
         
