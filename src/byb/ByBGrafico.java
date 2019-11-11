@@ -461,17 +461,17 @@ public class ByBGrafico extends javax.swing.JFrame {
     
     public Boolean verificarCampos(){
         for(String s: recogerDatosFO()){
-            if(s.equals("")){
+            if(s.equals("") || s.equals("-")){
                 return false;
             }
         }
         for(String s: recogerDatosRes()){
-            if(s.equals("")){
+            if(s.equals("") || s.equals("-")){
                 return false;
             }
         }
         for(String s: recogerDatosIRes()){
-            if(s.equals("")){
+            if(s.equals("") || s.equals("-")){
                 return false;
             }
         }
