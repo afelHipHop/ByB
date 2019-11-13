@@ -247,6 +247,7 @@ public class ByBGrafico extends javax.swing.JFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarPaneles();
         actualizarPaneles();
+        cmbFO.removeAllItems();
         btnSolucion.setEnabled(false);
         btnGenerar.setEnabled(true);
         txtRestricciones.setEnabled(true);
