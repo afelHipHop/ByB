@@ -33,10 +33,6 @@ public class ByBGrafico extends javax.swing.JFrame {
      */
     public ByBGrafico() {
         initComponents();
-        txt = new ArrayList<>();
-        txtFO = new ArrayList<>();
-        cb = new ArrayList<>();
-        lblSol = new ArrayList<>();
         cmbFO.removeAllItems();
         cmbFO.setEnabled(false);
         btnSolucion.setEnabled(false);
@@ -213,16 +209,24 @@ public class ByBGrafico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        cantRestricciones = Integer.parseInt(txtRestricciones.getText());
-        cantVariables = Integer.parseInt(txtVariables.getText());
-        generarCamposFO(cantVariables);
-        generarCampos(cantRestricciones,cantVariables);
-        generarCamposSol(cantVariables);
-        actualizarPaneles();
-        btnSolucion.setEnabled(true);
-        btnGenerar.setEnabled(false);
-        txtRestricciones.setEnabled(false);
-        txtVariables.setEnabled(false);
+        if(txtRestricciones.getText().equals("") || txtVariables.getText().equals("") || txtRestricciones.getText().equals("0") || txtVariables.getText().equals("0")){
+            JOptionPane.showMessageDialog(rootPane, "Campos de variables o restriccion incompletos");
+        }else{
+            cantRestricciones = Integer.parseInt(txtRestricciones.getText());
+            cantVariables = Integer.parseInt(txtVariables.getText());
+            txt = new ArrayList<>();
+            txtFO = new ArrayList<>();
+            cb = new ArrayList<>();
+            lblSol = new ArrayList<>();
+            generarCamposFO(cantVariables);
+            generarCampos(cantRestricciones,cantVariables);
+            generarCamposSol(cantVariables);
+            actualizarPaneles();
+            btnSolucion.setEnabled(true);
+            btnGenerar.setEnabled(false);
+            txtRestricciones.setEnabled(false);
+            txtVariables.setEnabled(false);
+        }
         
 
     }//GEN-LAST:event_btnGenerarActionPerformed
