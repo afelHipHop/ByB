@@ -5,9 +5,9 @@
  */
 package byb;
 
-import it.ssc.log.SscLogger;
-import it.ssc.parser.exception.InvalidInformatStringException;
-import it.ssc.pl.milp.MILP;
+import it.ssc.pl.milp.LP;
+import it.ssc.pl.milp.SimplexException;
+//import it.ssc.pl.milp.MILP;
 import it.ssc.pl.milp.Solution;
 import it.ssc.pl.milp.SolutionType;
 import it.ssc.pl.milp.Variable;
@@ -19,13 +19,13 @@ import java.util.ArrayList;
  */
 public class ByB {
     
-    private MILP milp;
+    private LP lp;
     private SolutionType st;
     private Solution solution;
     
     public ByB(String problema,int cVar) throws Exception{
-        milp=new MILP(agregarProblema(problema, cVar));
-        st = resolver(milp);
+        lp=new LP(agregarProblema(problema, cVar));
+        st = resolver(lp);
     }
 
     public Boolean getFactible() throws Exception{      
@@ -42,12 +42,12 @@ public class ByB {
         return milp_input;
     }
     
-    public SolutionType resolver(MILP milp)throws Exception{
+    public SolutionType resolver(LP milp)throws Exception{
         SolutionType solution_type= milp.resolve();
         return solution_type;
     }
     
-    public ArrayList<String> getNombreVariables(){
+    public ArrayList<String> getNombreVariables() throws SimplexException{
         sol();
         ArrayList<String> nVar = new ArrayList<>();
         for(Variable var:solution.getVariables()){
@@ -56,7 +56,7 @@ public class ByB {
         return nVar;
     }
     
-    public ArrayList<Double> getValorVariables(){
+    public ArrayList<Double> getValorVariables() throws SimplexException{
         sol();
         ArrayList<Double> vVar = new ArrayList<>();
         for(Variable var:solution.getVariables()){
@@ -65,14 +65,14 @@ public class ByB {
         return vVar;
     }
     
-    public Double getResultado(){
+    public Double getResultado() throws SimplexException{
         sol();
         return solution.getOptimumValue();
     }
     
-    public void sol(){
+    public void sol() throws SimplexException{
         if (solution==null)
-            solution=milp.getSolution();
+            solution=lp.getSolution();
         //return solution;
     }
 }

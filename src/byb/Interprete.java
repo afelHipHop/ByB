@@ -20,11 +20,11 @@ public class Interprete {
         
         funcionObj(varFunObj, obj);
         restricciones(varRes, operacion, valSol, cVar);
-        rango(cVar, "0", "lower  ");
-        rango(cVar, ".", "upper  ");
-        rango(cVar, "1", "integer");
+        //rango(cVar, "0", "lower  ");
+        //rango(cVar, ".", "upper  ");
+        //rango(cVar, "1", "integer");
         
-        //System.out.println(problema);
+        System.out.println(problema);
         
         return problema;
         
@@ -42,6 +42,8 @@ public class Interprete {
         int y=0;
         int x=0;
         for(int i = 1; i<=(r.size()+s.size());i++){
+            if(i==(r.size()+s.size())){
+                problema+=cambioSimb(s.get(y))+"       "+iR.get(y);}else{
             if(i%(cVar+1)==0&&i!=0){
                 problema+=cambioSimb(s.get(y))+"       "+iR.get(y)+" "+SALTO;
                 y++;
@@ -49,7 +51,7 @@ public class Interprete {
                 problema+=r.get(x)+" ";
                 x++;
             }
-        }
+        }}
     }
     
     public void rango(int cVar, String numero, String tipo){
